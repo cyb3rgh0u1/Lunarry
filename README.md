@@ -1,10 +1,103 @@
+# Lunarry: A CLI Wallpaper Hub
+>[!CAUTION] 
+>Under Construction: This project is actively being developed. Expect updates and new features soon and maybe I'll make something to make this installation easier. It's not completely usable yet cuz I'm too lazy. But you can give it a shot! 
+
+Lunarry is a command-line tool for browsing and downloading wallpapers from the `cyb3rgh0u1/Lunarry` GitHub repository (I'll pull this to its origin repo soon). It offers a streamlined way to preview, select, and save high-resolution wallpapers for your desktop.
+
+## Features
+
+Preview wallpapers using low-res images via fzf.
+Download full-resolution wallpapers to ~/Pictures/Wallpapers/.
+Cache previews in ~/.cache/lunarry/previews/ for quick access.
+Contribute your own wallpapers to the collection.
+
+## Usage
+Prerequisites
+
+'curl': For downloading wallpapers.
+'jq': For parsing GitHub API responses.
+'fzf': For the interactive menu.
+'wget': For downloading the script.
+
+Install on Debian/Ubuntu:
+```bash
+sudo apt-get install curl jq fzf wget
+```
+
+Install on Arch Linux:
+```bash
+sudo pacman -S curl jq fzf wget
+```
+
+## Setup
+
+Download the script and its helper:
+
+```bash
+wget https://raw.githubusercontent.com/cyb3rgh0u1/Lunarry/main/lunarry.sh 
+wget https://raw.githubusercontent.com/cyb3rgh0u1/Lunarry/main/fzf_preview.sh
+```
+
+
+Make the scripts executable:
+
+```bash
+chmod +x lunarry.sh
+chmod +x fzf_preview.sh
+```
+
+## Run
+Browse and download wallpapers:
+```bash
+./lunarry.sh --select
+```
+
+`Tab`: Select wallpapers.
+`Enter`: Confirm selection.
+`Esc`: Cancel.
+
+>[!NOTE]
+>Downloads are saved to ~/Pictures/Wallpapers/.
+
+>[!TIP]
+>Clear the preview cache if needed:
+
+```bash
+rm -rf ~/.cache/lunarry/previews/*
+```
+
+> [!CAUTION]
+>If using a terminal other than Kitty, modify fzf_preview.sh to use a compatible image viewer.
+>Avoid GitHub API rate limits by setting a token:
+
+```bash
+export GITHUB_TOKEN="your_token"
+```
+
+Download a specific wallpaper directly:
+
+```bash
+./lunarry.sh --fetch 1.png
+```
+
+
+
+## Contributing
+To add a wallpaper to the collection:
+
+Add your high-res image to the `Wallpapers/ directory` via a pull request to cyb3rgh0u1/Lunarry for now.
+Generate a low-res preview:
+
+```bash
+./wall-add.sh your-wallpaper.png
+```
+
+This creates a preview in the preview/ directory.
+Submit a pull request with both the wallpaper and its preview.
+
 # HyprLuna Image Gallery
+Browse our collection of 968 stunning images, perfect for your wallpaper. Thanks to orangc and evernos for their contributions.
 
-Here are some of the images that we have in our collection. Feel free to use them as your wallpaper!
-
-#### Thank for orangc and evernos for helping us on this gallery
-
-Total images that we have now: 968
 
 <table>
   <tr>
@@ -1622,3 +1715,20 @@ Total images that we have now: 968
     <td><img src="preview/zuchold-archtecture.jpg" width="200"></td>
   </tr>
 </table>
+
+
+
+
+
+## Troubleshooting
+
+FZF not opening? Verify fzf and fzf_preview.sh are set up:
+```bash
+./lunarry.sh --preview 1.png
+```
+
+
+Rate limit errors? Wait or use a GitHub token (see Tips).
+No previews? Ensure the preview/ directory matches Wallpapers/.
+
+Lunarry brings stunning visuals to your desktop with ease. Explore and enhance your setup today.
